@@ -135,7 +135,7 @@ At first you have limited access, and once the user goes into a meeting you'll s
 }
 ```
 
-If `canPair` is `true`, it means the user is in a meeting and you can send any [available command](#commands-available) to trigger the pairing message in Teams and your app will get a new token for the next connection. If seeing if the user is an a meeting is enough for your use case, you can skip the pairing process and just use `canPair` as an indication whether the user is in a meeting.
+If `canPair` is `true`, it means the user is in a meeting and you can send the `pair` command (or any [available command](#commands-available) other than `query-state`) to trigger the pairing message in Teams. If the user approves the request your app will get a new token for the next connection. If seeing if the user is an a meeting is enough for your use case, you can skip the pairing process and just use `canPair` as an indication whether the user is in a meeting.
 
 ### Messages send by Teams
 
@@ -204,9 +204,16 @@ Each command has a `requestId` that you can use to match the response to the req
 { "action":"some-action","parameters":{},"requestId":1 }
 ```
 
+#### Pair
+```json
+{"action":"pair","parameters":{},"requestId":1}
+```
+
 #### Send a reaction
 
-You can send several reactions to teams. The once tested: `like`, `love`, `applause`, `wow`, `laugh`
+You can send several reactions to teams. 
+
+Verified types: `like`, `love`, `applause`, `wow`, `laugh`
 
 ```json
 {
@@ -224,10 +231,34 @@ You can send several reactions to teams. The once tested: `like`, `love`, `appla
 {"action":"toggle-background-blur","parameters":{},"requestId":1}
 ```
 
+#### Turn on background blur
+
+```json
+{"action":"blur-background", parameters:{}, "requestId":1}
+```
+
+#### Turn off background blur
+
+```json
+{"action":"unblur-background", parameters:{}, "requestId":1}
+```
+
 #### Toggle Video
   
 ```json
 {"action":"toggle-video","parameters":{},"requestId":1}
+```
+
+#### Show Video
+  
+```json
+{"action":"show-video","parameters":{},"requestId":1}
+```
+
+#### Hide Video
+  
+```json
+{"action":"hide-video","parameters":{},"requestId":1}
 ```
 
 #### Toggle Mute
@@ -236,16 +267,68 @@ You can send several reactions to teams. The once tested: `like`, `love`, `appla
 {"action":"toggle-mute","parameters":{},"requestId":1}
 ```
 
+#### Mute
+
+```json
+{"action":"mute","parameters":{},"requestId":1}
+```
+
+#### Unmute
+
+```json
+{"action":"unmute","parameters":{},"requestId":1}
+```
+
 #### Toggle Hand
 
 ```json
 {"action":"toggle-hand","parameters":{},"requestId":1}
 ```
 
+#### Raise Hand
+
+```json
+{"action":"raise-hand","parameters":{},"requestId":1}
+```
+
+#### Lower Hand
+
+```json
+{"action":"lower-hand","parameters":{},"requestId":1}
+```
+
+#### Stop screen sharing
+
+```json
+{"action":"stop-sharing","parameters":{},"requestId":1}
+```
+
+#### Toggle ui elements
+
+You can toggle open/closed a couple of ui elements. 
+
+Verified types: `chat`, `share-tray`
+```json
+{
+  "action": "toggle-ui",
+  "parameters": {
+    "type": "chat"
+  },
+  "requestId": 1
+}
+```
+
 #### Leave call
 
 ```json
 {"action":"leave-call","parameters":{},"requestId":2}
+```
+
+#### Query state
+You can manually request teams to provide a meeting update
+
+```json
+{"action":"query-state", parameters:{}, "requestId":1}
 ```
 
 ## Socials

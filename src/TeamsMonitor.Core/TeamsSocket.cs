@@ -85,6 +85,14 @@ namespace TeamsMonitor.Core
         public async Task<int> SendReaction(string reaction, CancellationToken cancellationToken) => await CallServiceAsync("send-reaction", cancellationToken, new { @Type = reaction });
 
         /// <summary>
+        /// Send a toggle-ui request to Teams
+        /// </summary>
+        /// <param name="element">Any available element `chat`, `share-tray`</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<int> SendToggleUi(string element, CancellationToken cancellationToken) => await CallServiceAsync("toggle-ui", cancellationToken, new { @Type = element });
+
+        /// <summary>
         /// Connect to Teams Client
         /// </summary>
         /// <param name="blocking">Blocking will only return when cancelled, not blocking will start listening in background</param>
@@ -145,6 +153,20 @@ namespace TeamsMonitor.Core
         public Task<int> ToggleBackgroundBlurAsync(CancellationToken cancellationToken) => CallServiceAsync("toggle-background-blur", cancellationToken);
 
         /// <summary>
+        /// Blur background
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> BlurBackgroundAsync(CancellationToken cancellationToken) => CallServiceAsync("blur-background", cancellationToken);
+
+        /// <summary>
+        /// Unblur background
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> UnblurBackgroundAsync(CancellationToken cancellationToken) => CallServiceAsync("unblur-background", cancellationToken);
+
+        /// <summary>
         /// Toggle mute
         /// </summary>
         /// <param name="cancellationToken"></param>
@@ -152,11 +174,39 @@ namespace TeamsMonitor.Core
         public Task<int> ToggleMuteAsync(CancellationToken cancellationToken) => CallServiceAsync("toggle-mute", cancellationToken);
 
         /// <summary>
+        /// Mute
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> MuteAsync(CancellationToken cancellationToken) => CallServiceAsync("mute", cancellationToken);
+
+        /// <summary>
+        /// Unmute
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> UnmuteAsync(CancellationToken cancellationToken) => CallServiceAsync("unmute", cancellationToken);
+
+        /// <summary>
         /// Toggle Raise hand
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<int> ToggleRaiseHandAsync(CancellationToken cancellationToken) => CallServiceAsync("toggle-hand", cancellationToken);
+
+        /// <summary>
+        /// Raise hand
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> RaiseHandAsync(CancellationToken cancellationToken) => CallServiceAsync("raise-hand", cancellationToken);
+
+        /// <summary>
+        /// Lower hand
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> LowerHandAsync(CancellationToken cancellationToken) => CallServiceAsync("lower-hand", cancellationToken);
 
         /// <summary>
         /// Toggle recording
@@ -171,6 +221,56 @@ namespace TeamsMonitor.Core
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<int> ToggleVideoAsync(CancellationToken cancellationToken) => CallServiceAsync("toggle-video", cancellationToken);
+
+        /// <summary>
+        /// Show Video
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> ShowVideoAsync(CancellationToken cancellationToken) => CallServiceAsync("show-video", cancellationToken);
+
+        /// <summary>
+        /// Hide Video
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> HideVideoAsync(CancellationToken cancellationToken) => CallServiceAsync("hide-video", cancellationToken);
+
+        /// <summary>
+        /// Toggle chat pane
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> ToggleChatAsync(CancellationToken cancellationToken) => SendToggleUi("chat", cancellationToken);
+
+        /// <summary>
+        /// Toggle share tray
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> ToggleShareTrayAsync(CancellationToken cancellationToken) => SendToggleUi("share-tray", cancellationToken);
+
+        /// <summary>
+        /// Stop screen sharing
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> StopSharingAsync(CancellationToken cancellationToken) => CallServiceAsync("stop-sharing", cancellationToken);
+
+        /// <summary>
+        /// Pair
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> PairAsync(CancellationToken cancellationToken) => CallServiceAsync("pair", cancellationToken);
+
+
+        /// <summary>
+        /// Query State
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<int> QueryStateAsync(CancellationToken cancellationToken) => CallServiceAsync("query-state", cancellationToken);
 
         /// <summary>
         /// 
